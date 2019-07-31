@@ -37,13 +37,15 @@ export default class Calculator extends React.Component {
   }
 
   handleButtonPress = (value) => {
+    const lastChar = this.state.screen.split('').pop();
+
     switch(value) {
       case '+':
       case '-':
       case '/':
       case '*':
       case '%':
-        const lastChar = this.state.screen.split('').pop();
+      case '.':
         
         if (this.state.screen === '' || value.indexOf(lastChar) !== -1) return;
 
@@ -54,7 +56,7 @@ export default class Calculator extends React.Component {
       break;
     }
 
-    if (typeof value === 'number' || value === '.') {
+    if (typeof value === 'number') {
       this.setState({
         screen: this.state.screen.concat(value)
       });
@@ -74,6 +76,7 @@ export default class Calculator extends React.Component {
     }
 
     if (value === '+/-') {
+      if (this.state.screen.length === 0 ) return;
       const value = parseFloat(this.state.screen) * -1
       this.setState({
         screen: value.toString()
