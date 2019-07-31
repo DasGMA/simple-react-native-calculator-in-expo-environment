@@ -21,11 +21,13 @@ export default class Calculator extends React.Component {
     const buttonsGrid = this.state.buttonsGrid;
     for (let i = 0; i < BUTTONS.length; i++) {
       for (let j = 0; j < BUTTONS[i].length; j++) {
-        buttonsGrid.push(<Button
-          key = {BUTTONS[i][j]}
-          text = {BUTTONS[i][j]}
-          onPress = {() => this.handleButtonPress(BUTTONS[i][j])}
-        />);
+        buttonsGrid.push(
+          <Button
+            key = {BUTTONS[i][j]}
+            text = {BUTTONS[i][j]}
+            onPress = {() => this.handleButtonPress(BUTTONS[i][j])}
+          />
+        );
       }
     };
 
@@ -48,6 +50,7 @@ export default class Calculator extends React.Component {
         this.setState({
           screen: this.state.screen.concat(value)
         });
+
       break;
     }
 
@@ -97,7 +100,7 @@ export default class Calculator extends React.Component {
     const lastCharacter = this.state.screen.split('').pop();
 
     if (opsArray.includes(lastCharacter)) return;
-    
+
     const finalValue = this.state.screen.length === 0 ? eval(0).toString() : eval(this.state.screen).toString();
     this.setState({
       screen: '',
